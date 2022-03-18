@@ -1,8 +1,15 @@
 const express = require('express')
 const app = express()
 const cors = require('cors')
-require('dotenv').config()
+require('dotenv').config();
+let mongoose = require("mongoose");
+let {usersRouter} = require("./routes/usersRoutes");
 
+let uriSting = process.env.MONGO_URI
+let log = console.log;
+
+app.use(express.urlencoded({extended: true}));
+app.use(express.json())
 app.use(cors())
 app.use(express.static('public'))
 app.get('/', (req, res) => {
@@ -10,6 +17,17 @@ app.get('/', (req, res) => {
 });
 
 
+
+
+mongoose.connect(uriSting, { useNewUrlParser: true, useUnifiedTopology: true })
+    .then(()=>{
+      log("Connection to the DB succeeeeed!");
+
+      //Mongo & Node manipulations will go here//
+      app.use("/api/users", usersRouter);
+
+    })
+    .catch(err =>log("Error connecting to the DB :",err))
 
 
 
