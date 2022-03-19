@@ -5,6 +5,7 @@ let log = console.log;
 
 let usersSchema = new Schema({
     username : String,
+    num : Number
 });
 let exercisesSchema = new Schema({
     username : String,
