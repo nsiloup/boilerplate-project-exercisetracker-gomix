@@ -4,6 +4,10 @@ const cors = require('cors')
 require('dotenv').config();
 let mongoose = require("mongoose");
 let {usersRouter} = require("./routes/usersRoutes");
+let {exercisesRouter} = require("./routes/exercisesRoutes");
+let {logsRouter} = require("./routes/logsRoutes");
+let {deleteSome} = require("./helpers/deleteSome");
+
 
 let uriSting = process.env.MONGO_URI
 let log = console.log;
@@ -24,7 +28,11 @@ mongoose.connect(uriSting, { useNewUrlParser: true, useUnifiedTopology: true })
       log("Connection to the DB succeeeeed!");
 
       //Mongo & Node manipulations will go here//
-      app.use("/api/users", usersRouter);
+      app.use("/api/users", usersRouter, exercisesRouter, logsRouter);
+
+      // Call a function to delete some exceeding data
+      deleteSome()
+
 
     })
     .catch(err =>log("Error connecting to the DB :",err))
