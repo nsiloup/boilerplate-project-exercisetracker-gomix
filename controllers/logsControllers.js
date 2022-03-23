@@ -4,7 +4,7 @@ let {UsersModel} = require("../model/usersModel");
 let {iteratableNumPropFunc} = require("../helpers/managing_DB_helpers");
 let log = console.log;
 
-let logsModel_create_get = async(req, res, next)=>{
+let logsModel_create_logs = async(req, res, next)=>{
     try{
         let {_id} = req.params;
         let o = await UsersModel.findById(_id, {username :1}).lean(); // The object for "users" items
@@ -57,7 +57,17 @@ let logsModel_create_get = async(req, res, next)=>{
     }
 };
 
+let logsModel_get_range_N_limit = async(req, res, next) =>{
+    try{
+        let {from, to, limit} = req.query;
+        let obj = {}
+    }catch(err){
+        log(err);
+        next(err);
+    }
+};
 
 module.exports = {
-    logsModel_create_get,
+    logsModel_create_logs,
+    logsModel_get_range_N_limit
 };

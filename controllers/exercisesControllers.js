@@ -12,7 +12,7 @@ let exercisesModel_create_post = async (req, res, next) =>{
         let providedDate = date;
         let  dateToRutrun;
         if(!providedDate){
-            dateToRutrun = Date()
+            dateToRutrun = new Date().toDateString()
         }else{
             let d = new Date(providedDate);
             dateToRutrun = d.toDateString();
@@ -26,7 +26,7 @@ let exercisesModel_create_post = async (req, res, next) =>{
         obj.description = description;
         obj.duration = duration;
         obj.date = dateToRutrun;
-        obj.username = username
+        obj.username = username;
 
         // creating a iteratable _num entry for better controlling the documents
         let dataArr = await ExercisesModel.find({}).lean();
