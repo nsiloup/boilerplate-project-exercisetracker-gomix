@@ -7,6 +7,7 @@ let exercisesSchema = new Schema({
     description : String,
     duration : Number,
     date : String,
+    globalUserId : {type : String, index :true},
     _num : {type : Number, index : true}
 });
 

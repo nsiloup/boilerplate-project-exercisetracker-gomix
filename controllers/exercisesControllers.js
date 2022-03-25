@@ -32,7 +32,7 @@ let exercisesModel_create_post = async (req, res, next) =>{
         let dataArr = await ExercisesModel.find({}).lean();
         let num = iteratableNumPropFunc(dataArr);// this function contains "_num" that i want to create;
         obj._num = num;
-
+        obj.globalUserId = _id;
         let savedObj = await ExercisesModel.create(obj);
 
         let retObj = {};
